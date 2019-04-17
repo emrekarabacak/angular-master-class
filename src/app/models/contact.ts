@@ -15,3 +15,6 @@ export interface Contact {
   image?: string;
   address?: Address;
 }
+
+export interface ContactResponse  { item  : Contact    } 
+export interface ContactsResponse { items : Contact[]  } 
