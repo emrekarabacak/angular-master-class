@@ -1,8 +1,5 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ContactsService } from '../contacts.service';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { Contact } from '../models/contact';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'trm-contacts-detail',
@@ -11,15 +8,19 @@ import { Subscription } from 'rxjs';
 })
 export class ContactsDetailComponent implements OnInit {
   
-  contact: Contact
-  routeSubs: Subscription
+  @Input()contact: Contact
+  @Output() back = new EventEmitter();
+  @Output() edit = new EventEmitter<string>();
 
-  constructor(private route: ActivatedRoute, private contactsService: ContactsService) { }
+  constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {}
 
-    let id = this.route.snapshot.params['id'];
-    this.contactsService
-      .getContact(id).subscribe(data => this.contact = data);
+  backToList(){
+    this.back.emit();
+  }
+
+  navigateToEdit(id){
+    this.edit.emit(id);
   }
 }

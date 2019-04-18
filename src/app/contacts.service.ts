@@ -1,6 +1,5 @@
 import { Injectable, Inject, InjectionToken } from '@angular/core';
 import { Contact, ContactResponse } from './models/contact';
-import { CONTACT_DATA } from './data/contact-data';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -29,5 +28,11 @@ export class ContactsService {
 
   updateContact(contact: Contact): Observable<any> {
     return this.http.put<Observable<any>>(`${this.API_ENDPOINT}/contacts/${contact.id}`, contact);
+  }
+
+  search(term: string): Observable<Array<Contact>>{
+    return this.http.get<ContactsResponse>(`${this.API_ENDPOINT}/search?text=${term}`).pipe(
+      map(data => data.items)
+    );
   }
 }

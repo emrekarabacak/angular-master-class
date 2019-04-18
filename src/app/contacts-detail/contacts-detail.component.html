@@ -22,8 +22,8 @@
       </dl>
     </mat-card-content>
     <mat-card-actions fxLayout fxLayoutAlign="center center">
-      <a mat-button title="Go back to list" routerLink="/" >Go Back</a>
-      <a mat-button title="Edit" [routerLink]="['edit']" >Edit</a>
+      <a mat-button title="Go back to list" (click)='backToList()'>Go Back</a>
+      <a mat-button title="Edit" (click)='navigateToEdit(contact?.id)'>Edit</a>
     </mat-card-actions>
   </mat-card>
 </div>
